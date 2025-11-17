@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BestGames — Маркетплейс</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">BG</div>
+      <div>
+        <h1>BestGames</h1>
+        <p class="lead">Маркетплейс игр и внутриигровых предметов</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <input id="globalSearch" placeholder="Поиск игр, предметов..." />
+        <button class="chip" id="clearFiltersBtn">Сброс</button>
+      </div>
+
+      <div class="flex">
+        <div class="badge" id="resultCount">0</div>
+        <button class="btn ghost" id="toggleCartBtn">Корзина (0)</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ЛЕВАЯ ПАНЕЛЬ -->
+    <aside class="panel left">
+      <h3>Фильтры</h3>
+
+      <div class="filter-group">
+        <label>Категория</label>
+        <div class="checkbox-list" id="categoryList"></div>
+      </div>
+
+      <div class="filter-group">
+        <label>Платформы</label>
+        <div class="checkbox-list" id="platformList"></div>
+      </div>
+
+      <div class="filter-group">
+        <label>Цена (до)</label>
+        <div class="range">
+          <input type="range" id="priceRange" min="0" max="100" value="100" />
+          <div class="muted" id="priceVal">100$</div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label><input type="checkbox" id="onlyDiscount" /> Только со скидкой</label>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="applyBtn">Применить</button>
+        <button class="btn ghost" id="clearBtn">Очистить</button>
+      </div>
+    </aside>
+
+    <!-- ПРАВАЯ ПАНЕЛЬ -->
+    <section class="right">
+      <div class="toolbar">
+        <div class="muted">Отображено <span id="shownCount">0</span> товаров</div>
+
+        <div class="flex">
+          <select id="sortBy" class="sort-select">
+            <option value="relevance">По релевантности</option>
+            <option value="price-asc">Цена ↑</option>
+            <option value="price-desc">Цена ↓</option>
+            <option value="discount">Скидка</option>
+            <option value="rating">Рейтинг</option>
+          </select>
+
+          <select id="perPage" class="perpage">
+            <option value="3">3 колонки</option>
+            <option value="2">2 колонки</option>
+            <option value="1">1 колонка</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="catalog" class="grid"></div>
+
+      <div class="center">
+        <button class="btn ghost" id="loadMoreBtn">Загрузить ещё</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- МОДАЛ -->
+  <div id="productModal" class="modal">
+    <div class="modal-card">
+      <div class="modal-left">
+        <h3 id="modalTitle"></h3>
+        <div class="muted" id="modalSubtitle"></div>
+        <div id="modalCarousel" class="carousel"></div>
+        <div class="specs" id="modalDesc"></div>
+      </div>
+
+      <div class="modal-right">
+        <div class="price" id="modalPrice"></div>
+        <div class="old" id="modalOldPrice"></div>
+
+        <label>Количество</label>
+        <input id="modalQty" type="number" value="1" min="1" />
+
+        <div class="flex mt-12">
+          <button class="btn" id="addToCartBtn">В корзину</button>
+          <button class="btn ghost" id="buyNowBtn">Купить</button>
+        </div>
+
+        <div class="muted mt-12">
+          Оценка: <span id="modalRating"></span> • <span id="modalTagline"></span>
+        </div>
+
+        <button id="closeModalBtn" class="close-x">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- КОРЗИНА -->
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="flex space-between">
+      <strong>Корзина</strong>
+      <button class="close-x" id="closeCartBtn">✕</button>
+    </div>
+
+    <div id="cartList"></div>
+
+    <div class="flex space-between mt-12">
+      <div class="muted">Итого:</div>
+      <div id="cartTotal"></div>
+    </div>
+
+    <div class="flex mt-12">
+      <button class="btn" id="checkoutBtn">Оформить</button>
+      <button class="btn ghost" id="clearCartBtn">Очистить</button>
+    </div>
+  </div>
+
+  <footer>© BestGames — Демо версии</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
